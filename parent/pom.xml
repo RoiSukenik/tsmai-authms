@@ -33,6 +33,7 @@
         <testcontainers.version>1.19.8</testcontainers.version>
         <kotlinx-coroutines.version>1.9.0-RC</kotlinx-coroutines.version>
         <mockito.version>5.12.0</mockito.version>
+        <jmeter-maven-plugin.version>3.5.0</jmeter-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -332,6 +333,31 @@
                         <phase>test-compile</phase>
                         <goals>
                             <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>${jmeter-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>configuration</id>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jmeter-check-results</id>
+                        <goals>
+                            <goal>results</goal>
                         </goals>
                     </execution>
                 </executions>
