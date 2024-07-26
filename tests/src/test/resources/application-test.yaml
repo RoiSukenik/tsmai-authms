@@ -1,0 +1,27 @@
+#server:
+#  port: 8080
+#
+#security:
+#  authType: "jwt"
+#  jwt:
+#    secretKey: "6fd77fa751d908c351e7fed62b8aa2fc401c1417b5110352fa127b7044b5f293"
+#    expirationTime: 3600000
+#
+#logging:
+#  level:
+#    root: info
+#
+## Increased timeout to fit slower environments like TravisCI
+#spring:
+#  couchbase:
+#    env:
+#      timeouts:
+#        view: 15000
+#        query: 15000
+#    connection-string: "couchbase://127.0.0.1"
+#    username: "Administrator"
+#    password: "password"
+#  data:
+#    couchbase:
+#      bucket-name: "auth"
+#      auto-index: true
