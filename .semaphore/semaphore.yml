@@ -1,5 +1,5 @@
 version: v1.0
-name: Ubuntu18 Based Pipeline
+name: Build and Unit Test Flow
 agent:
   machine:
     type: e1-standard-2
