@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "security.authType",
+      "type": "java.lang.String",
+      "description": "Description for security.authType."
+    },
+    {
+      "name": "security.jwt.secretKey",
+      "type": "java.lang.String",
+      "description": "Description for security.jwt.secretKey."
+    },
+    {
+      "name": "security.jwt.expirationTime",
+      "type": "java.lang.String",
+      "description": "Description for security.jwt.expirationTime."
+    }
+  ]
+}
