@@ -2,7 +2,7 @@ version: v1.0
 name: Initial Pipeline
 agent:
   machine:
-    type: e1-standard-2
+    type: f1-standard-2
     os_image: ubuntu2004
 blocks:
   - name: 'Block #1'
@@ -15,8 +15,22 @@ blocks:
     task:
       prologue:
         commands:
+          - sem-version java 17
           - checkout
+          - cache restore
+          - mvn -q test-compile -Dmaven.test.skip=true
       jobs:
         - name: Unit Tests
           commands:
             - echo 'running unit tests'
+            - mvn test
+  - name: Performance test
+    task:
+      jobs:
+        - name: Benchmark
+          commands:
+            - sem-version java 17
+            - java -jar target/spring-pipeline-demo.jar > /dev/null &
+            - sleep 20
+            - 'mvn -q jmeter:jmeter'
+            - 'mvn jmeter:results'
