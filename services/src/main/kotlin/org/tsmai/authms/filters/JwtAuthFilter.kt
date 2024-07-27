@@ -1,10 +1,10 @@
 package org.tsmai.authms.filters
 
+import jakarta.inject.Inject
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.lang.NonNull
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
@@ -17,10 +17,12 @@ import org.tsmai.authms.services.authentication.interfaces.IJwtAuthService
 
 @Component
 @RequiredArgsConstructor
-class JwtAuthFilter(
-    @Autowired private val jwtAuthService: IJwtAuthService,
-    @Autowired private val userDetailsService: UserDetailsService
-) : OncePerRequestFilter() {
+class JwtAuthFilter : OncePerRequestFilter() {
+
+    @Inject
+    private lateinit var jwtAuthService: IJwtAuthService
+    @Inject
+    private lateinit var userDetailsService: UserDetailsService
 
     override fun doFilterInternal(
         @NonNull request: HttpServletRequest,

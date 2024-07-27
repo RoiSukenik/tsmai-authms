@@ -1,16 +1,15 @@
 package org.tsmai.authms.services.authentication.jwt
 
-import org.springframework.beans.factory.annotation.Autowired
+import jakarta.inject.Inject
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.stereotype.Service
 import org.tsmai.authms.persistence.repositories.user.UserRepository
 
-@Service
-class CustomUserDetailsService(@Autowired private val userRepository: UserRepository): UserDetailsService {
+class CustomUserDetailsService: UserDetailsService {
 
-
+    @Inject
+    private lateinit var userRepository: UserRepository
 
     override fun loadUserByUsername(username: String): UserDetails {
          return userRepository.findByEmail(username).orElseThrow {

@@ -2,11 +2,12 @@ package org.tsmai.authms.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.tsmai.authms.services.authentication.interfaces.IJwtAuthService
+import org.tsmai.authms.services.authentication.jwt.JwtAuthService
 import org.tsmai.authms.services.encryption.EncryptionService
 import org.tsmai.authms.services.encryption.IEncryptionService
 import org.tsmai.authms.services.registration.IRegistrationService
 import org.tsmai.authms.services.registration.RegistrationService
-import org.tsmai.authms.services.utils.JwtUtil
 
 @Configuration
 class BusinessConfig {
@@ -22,7 +23,7 @@ class BusinessConfig {
     }
 
     @Bean
-    fun jwtUtil(): JwtUtil {
-        return JwtUtil()
+    fun jwtAuthService(): IJwtAuthService {
+        return JwtAuthService()
     }
 }

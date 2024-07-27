@@ -12,8 +12,6 @@ import org.tsmai.authms.services.authentication.interfaces.IJwtAuthService
 import java.util.Date
 import javax.crypto.SecretKey
 
-
-@Service
 class JwtAuthService : IJwtAuthService {
     companion object {
         val AUTH_SERVICE_TYPE = AuthServiceType.JWT.name

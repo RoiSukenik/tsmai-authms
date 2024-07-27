@@ -1,13 +1,11 @@
 package org.tsmai.authms.services.encryption
 
-import org.springframework.beans.factory.annotation.Autowired
+import jakarta.inject.Inject
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.stereotype.Service
 
-@Service
 class EncryptionService : IEncryptionService {
 
-    @Autowired
+    @Inject
     private lateinit var encoder: PasswordEncoder
 
     override fun encrypt(password: String): String {
