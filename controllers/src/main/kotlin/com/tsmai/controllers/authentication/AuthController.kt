@@ -3,18 +3,17 @@ package com.tsmai.controllers.authentication
 import com.tsmai.controllers.models.AuthenticationRequest
 import com.tsmai.controllers.models.AuthenticationResponse
 import com.tsmai.controllers.models.RegistrationRequest
-import org.springframework.beans.factory.annotation.Autowired
+import jakarta.inject.Inject
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.tsmai.authms.persistence.models.resource.User
 import org.tsmai.authms.services.registration.IRegistrationService
 
 @RequestMapping(path = ["/authentication"])
-class AuthController(@Autowired private val registrationService: IRegistrationService) : IAuthController {
+class AuthController(@Inject private val registrationService: IRegistrationService) : IAuthController {
 
     @PostMapping(path = ["/login"])
     override suspend fun login(@RequestBody request: AuthenticationRequest): ResponseEntity<AuthenticationResponse> {
