@@ -27,7 +27,7 @@
         <lombok.version>1.18.32</lombok.version>
         <spring-data-couchbase.version>5.3.2</spring-data-couchbase.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <mapstruct.version>1.6.0.Beta1</mapstruct.version>
+        <mapstruct.version>1.6.0.RC1</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <junit-jupiter.version>5.11.0-M2</junit-jupiter.version>
         <spring-framework.version>6.1.8</spring-framework.version>
@@ -211,8 +211,8 @@
     </repositories>
 
     <build>
-        <sourceDirectory>${myTestSourceDirectory}</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${myTestSourceDirectory}</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -261,7 +261,7 @@
                             </annotationProcessorPaths>
                             <annotationProcessorArgs>
                                 <annotationProcessorArg>
-                                    mapstruct.defaultComponentModel=jsr330
+                                    mapstruct.defaultComponentModel=jakarta
                                 </annotationProcessorArg>
                                 <annotationProcessorArg>
                                     mapstruct.unmappedTargetPolicy=WARN
