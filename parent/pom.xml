@@ -18,6 +18,8 @@
     <name>${project.artifactId}:${project.version}</name>
 
     <properties>
+        <myTestSourceDirectory>${project.basedir}/src/test/java</myTestSourceDirectory>
+
         <java.version>17</java.version>
         <kotlin.version>2.0.0</kotlin.version>
         <spring-boot.version>3.3.0</spring-boot.version>
@@ -34,6 +36,7 @@
         <kotlinx-coroutines.version>1.9.0-RC</kotlinx-coroutines.version>
         <mockito.version>5.12.0</mockito.version>
         <jmeter-maven-plugin.version>3.8.0</jmeter-maven-plugin.version>
+        <apache-jmeter-core.version>5.6.3</apache-jmeter-core.version>
         <jakarta-inject.version>2.0.1</jakarta-inject.version>
     </properties>
 
@@ -208,7 +211,7 @@
     </repositories>
 
     <build>
-        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <sourceDirectory>${myTestSourceDirectory}</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
@@ -302,7 +305,6 @@
                         </configuration>
                     </execution>
                 </executions>
-
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
