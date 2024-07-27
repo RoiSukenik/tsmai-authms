@@ -6,17 +6,16 @@ import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.stereotype.Component
 import java.util.Date
 import javax.crypto.SecretKey
 import kotlin.reflect.KFunction1
 
+class JwtUtil {
 
-@Component
-class JwtUtil(
-    @Value("\${security.jwt.secret-key}") private val secretKey: String,
-    @Value("\${security.jwt.expiration-time}") private val jwtExpiration: Long
-) {
+    @Value("\${security.jwt.secret-key}")
+    private lateinit var secretKey: String
+    @Value("\${security.jwt.expiration-time}")
+    private lateinit var jwtExpiration: String
 
     fun extractUserNameFromToken(token: String): String {
         return extractClaim(token, Claims::getSubject)
@@ -32,11 +31,11 @@ class JwtUtil(
     }
 
     fun generateToken(extraClaims: Map<String?, Any?>, userDetails: UserDetails): String {
-        return buildToken(extraClaims, userDetails, jwtExpiration)
+        return buildToken(extraClaims, userDetails, jwtExpiration.toLong())
     }
 
     fun getExpirationTime(): Long {
-        return jwtExpiration
+        return jwtExpiration.toLong()
     }
 
     private fun buildToken(

@@ -258,7 +258,7 @@
                             </annotationProcessorPaths>
                             <annotationProcessorArgs>
                                 <annotationProcessorArg>
-                                    mapstruct.defaultComponentModel=spring
+                                    mapstruct.defaultComponentModel=jsr330
                                 </annotationProcessorArg>
                                 <annotationProcessorArg>
                                     mapstruct.unmappedTargetPolicy=WARN
