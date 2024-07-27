@@ -10,6 +10,8 @@ blocks:
       jobs:
         - name: Build
           commands:
+            - sem-version java 17
             - checkout
-            - sem-version java 1.8
-            - mvn -B package --file pom.xml
+            - cache restore
+            - 'mvn -q package jmeter:configure -Dmaven.test.skip=true'
+            - cache store
