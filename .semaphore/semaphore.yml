@@ -38,3 +38,5 @@ blocks:
             - sleep 20
             - 'mvn -q jmeter:jmeter'
             - 'mvn jmeter:results'
+    run:
+      when: branch = 'qa'
