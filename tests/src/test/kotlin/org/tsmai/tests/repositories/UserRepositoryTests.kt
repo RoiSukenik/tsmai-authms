@@ -1,5 +1,6 @@
 package org.tsmai.tests.repositories
 
+import jakarta.inject.Inject
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -7,17 +8,16 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
 import org.testcontainers.shaded.org.awaitility.Awaitility.await
+import org.tsmai.authms.persistence.repositories.user.UserRepository
 import org.tsmai.tests.setup.BaseCouchbaseSpringTestSetup
 import org.tsmai.tests.setup.CouchbaseTestMocks.Companion.userDto1
 import org.tsmai.tests.setup.CouchbaseTestMocks.Companion.userDto2
-import org.tsmai.authms.persistence.repositories.user.UserRepository
 import java.util.concurrent.TimeUnit
 
 internal class UserRepositoryTests : BaseCouchbaseSpringTestSetup() {
 
-    @Autowired
+    @Inject
     private lateinit var userRepository: UserRepository
 
     @AfterEach
