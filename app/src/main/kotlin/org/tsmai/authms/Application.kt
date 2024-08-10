@@ -4,14 +4,22 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories
+import org.springframework.context.annotation.PropertySource
+import org.springframework.context.annotation.PropertySources
+import org.springframework.web.reactive.config.EnableWebFlux
 import org.tsmai.authms.Application.Companion.logger
-import org.tsmai.authms.persistence.repositories.user.UserRepository
-
 
 @SpringBootApplication(scanBasePackages = ["org.tsmai.authms"])
-@EnableCouchbaseRepositories(basePackageClasses = [UserRepository::class])
-class Application{
+@EnableWebFlux
+@PropertySources(
+    PropertySource(
+        value = arrayOf(
+            "classpath:tsmai-authms-application.yaml",
+            "classpath:tsmai-authms-persistence-application.yaml"
+        ), factory = YamlPropertySourceFactory::class
+    )
+)
+class Application {
 
     companion object {
         val logger: Logger = LoggerFactory.getLogger(Application::class.java)

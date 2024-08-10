@@ -4,23 +4,24 @@ import lombok.RequiredArgsConstructor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.AuthenticationProvider
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
-import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
+import org.springframework.security.config.web.server.ServerHttpSecurity
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import org.tsmai.authms.filters.JwtAuthFilter
-import org.tsmai.authms.services.authentication.jwt.CustomUserDetailsService
+import org.springframework.security.web.server.SecurityWebFilterChain
+import org.tsmai.authms.persistence.models.dto.UserDTO
+import org.tsmai.authms.services.authentication.jwt.JWTAuthenticationManager
+import org.tsmai.authms.services.authentication.jwt.ReactiveCustomUserDetailsService
 import org.tsmai.authms.services.utils.JwtUtil
 
 @Configuration
-@EnableWebSecurity
+@EnableWebFluxSecurity
+@EnableReactiveMethodSecurity
 @RequiredArgsConstructor
 class SecurityConfig {
 
@@ -30,26 +31,13 @@ class SecurityConfig {
     }
 
     @Bean
-    fun userDetailsService(): UserDetailsService {
-        return CustomUserDetailsService()
+    fun reactiveCustomUserDetailsService(): ReactiveUserDetailsService {
+        return ReactiveCustomUserDetailsService()
     }
 
     @Bean
-    fun authenticationProvider(): AuthenticationProvider {
-        val provider = DaoAuthenticationProvider()
-        provider.setUserDetailsService(userDetailsService())
-        provider.setPasswordEncoder(passwordEncoder())
-        return provider
-    }
-
-    @Bean
-    fun authenticationManager(authenticationConfiguration: AuthenticationConfiguration): AuthenticationManager {
-        return authenticationConfiguration.authenticationManager
-    }
-
-    @Bean
-    fun jwtAuthFilter(): JwtAuthFilter {
-        return JwtAuthFilter()
+    fun authenticationManager(): ReactiveAuthenticationManager {
+        return JWTAuthenticationManager()
     }
 
     @Bean
@@ -59,16 +47,20 @@ class SecurityConfig {
 
     @Bean
     @Throws(Exception::class)
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        http.csrf { csrf ->
-            csrf.disable()
+    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+        http.authorizeExchange { exchanges ->
+            exchanges
+                .pathMatchers("actuator/*").permitAll()
+                .pathMatchers("/admin").hasAuthority(UserDTO.Roles.ADMIN.name)
+                .pathMatchers("/api/v1/login", "/api/v1/logout").permitAll()
+                .anyExchange().authenticated()
         }
-            .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/").permitAll().anyRequest().authenticated()
+            .csrf {
+                it.disable()
             }
-            .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter::class.java)
+            .authenticationManager(authenticationManager())
+
+
         return http.build();
     }
 }

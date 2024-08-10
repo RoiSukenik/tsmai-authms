@@ -1,8 +1,8 @@
 package org.tsmai.authms.persistence.repositories
 
-import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.NoRepositoryBean
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import org.springframework.data.repository.reactive.ReactiveSortingRepository
 
 @NoRepositoryBean
-interface IBaseRepository<T, ID> : CrudRepository<T, ID>, PagingAndSortingRepository<T, ID>
+interface IBaseRepository<T, ID> : ReactiveCrudRepository<T, ID>, ReactiveSortingRepository<T, ID>

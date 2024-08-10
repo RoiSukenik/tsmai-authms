@@ -13,7 +13,7 @@ import org.tsmai.authms.Application
     classes = [Application::class,TestConfig::class],
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-internal open class SpringTestSetup: TestSetup() {
+internal class SpringTestSetup: TestSetup() {
     companion object {
         private val log = LoggerFactory.getLogger(SpringTestSetup::class.java)
     }

@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration
+import org.springframework.data.couchbase.repository.config.EnableReactiveCouchbaseRepositories
 
 @Configuration
+@EnableReactiveCouchbaseRepositories
 class CouchbaseConfig(
     @Value("\${spring.couchbase.connection-string}")
     val couchbaseConnectionString: String,

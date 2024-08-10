@@ -20,7 +20,7 @@ import org.testcontainers.utility.DockerImageName
 import java.time.Duration
 
 @Testcontainers(disabledWithoutDocker = true)
-internal open class BaseCouchbaseSpringTestSetup : SpringTestSetup() {
+internal class BaseCouchbaseSpringTestSetup : SpringTestSetup() {
 
     companion object {
 
@@ -53,6 +53,7 @@ internal open class BaseCouchbaseSpringTestSetup : SpringTestSetup() {
                 couchbaseContainer.start()
                 userToCouchBase("name=user", "/pools/default/buckets/auth/scopes")
                 userToCouchBase("name=users", "/pools/default/buckets/auth/scopes/user/collections")
+//                waitUntilDatastoreReadyOrTimedOut()
             }
             log.debug("The readiness check of datasource is finished")
         }

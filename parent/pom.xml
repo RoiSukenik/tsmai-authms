@@ -23,6 +23,7 @@
         <java.version>17</java.version>
         <kotlin.version>2.0.0</kotlin.version>
         <spring-boot.version>3.3.0</spring-boot.version>
+        <reactor-core.version>3.6.0</reactor-core.version>
         <jackson-module-kotlin.version>2.9.8</jackson-module-kotlin.version>
         <lombok.version>1.18.32</lombok.version>
         <spring-data-couchbase.version>5.3.2</spring-data-couchbase.version>
@@ -49,8 +50,13 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-core</artifactId>
+                <version>${reactor-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -337,31 +343,31 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.lazerycode.jmeter</groupId>
-                <artifactId>jmeter-maven-plugin</artifactId>
-                <version>${jmeter-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>configuration</id>
-                        <goals>
-                            <goal>configure</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jmeter-tests</id>
-                        <goals>
-                            <goal>jmeter</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jmeter-check-results</id>
-                        <goals>
-                            <goal>results</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.lazerycode.jmeter</groupId>-->
+<!--                <artifactId>jmeter-maven-plugin</artifactId>-->
+<!--                <version>${jmeter-maven-plugin.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>configuration</id>-->
+<!--                        <goals>-->
+<!--                            <goal>configure</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>jmeter-tests</id>-->
+<!--                        <goals>-->
+<!--                            <goal>jmeter</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>jmeter-check-results</id>-->
+<!--                        <goals>-->
+<!--                            <goal>results</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

@@ -28,10 +28,8 @@ class RegistrationService : IRegistrationService {
     }
 
     override fun registerUser(user: User): String {
-        userRepository.existsByEmail(email = user.email).let {
-            if (it) {
-                throw UserExistsError()
-            }
+        userRepository.existsByEmail(email = user.email).log().let {
+            it.handle<Unit> { user, sink -> if(user) sink.error(UserExistsError()) }
         }
         val userDTO: UserDTO = userMapper.toUserDTO(user).apply {
             log.debug("Encrypting password...")
