@@ -15,6 +15,7 @@ blocks:
             - cache restore
             - mvn -q package -Dmaven.test.skip=true
             - cache store
+    dependencies: []
   - name: Tests
     task:
       prologue:
@@ -28,6 +29,8 @@ blocks:
           commands:
             - echo 'running unit tests'
             - mvn test
+    dependencies:
+      - Build
   - name: Performance test
     task:
       jobs:
@@ -40,3 +43,13 @@ blocks:
             - 'mvn jmeter:results'
     run:
       when: branch = 'qa'
+    dependencies:
+      - Tests
+  - name: Code Analysis
+    dependencies:
+      - Tests
+    task:
+      jobs:
+        - name: Code Analyze
+          commands:
+            - 'mvn sonar:sonar -Pcoverage'
