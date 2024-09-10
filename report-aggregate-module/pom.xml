@@ -5,8 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.tsmsi</groupId>
-        <artifactId>reactor</artifactId>
+        <artifactId>parent</artifactId>
         <version>0.1.0</version>
+        <relativePath>
+            ../parent
+        </relativePath>
     </parent>
 
     <artifactId>report-aggregate-module</artifactId>
@@ -49,6 +52,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>report-aggregate</id>
@@ -56,6 +60,12 @@
                         <goals>
                             <goal>report-aggregate</goal>
                         </goals>
+                        <configuration>
+                            <dataFileIncludes>
+                                <dataFileInclude>**/jacoco.exec</dataFileInclude>
+                            </dataFileIncludes>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
