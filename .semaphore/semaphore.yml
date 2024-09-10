@@ -52,5 +52,4 @@ blocks:
       jobs:
         - name: Code Analyze
           commands:
-            - 'mvn sonar:sonar -Pcoverage'
-            - mvn clean verify
+            - 'mvn clean verify sonar:sonar'
