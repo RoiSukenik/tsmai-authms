@@ -53,3 +53,4 @@ blocks:
         - name: Code Analyze
           commands:
             - 'mvn sonar:sonar -Pcoverage'
+            - mvn clean verify
