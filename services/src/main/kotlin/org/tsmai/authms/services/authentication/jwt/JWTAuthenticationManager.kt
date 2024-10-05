@@ -39,7 +39,6 @@ class JWTAuthenticationManager : ReactiveAuthenticationManager {
         return ServerAuthenticationConverter { exchange ->
             var token = exchange.request.headers.getFirst("Authorization")
             if (token != null && token.startsWith("Bearer ")) {
-                token = token.substring(7)
                 return@ServerAuthenticationConverter Mono.just<Authentication>(SecurityContextHolder.getContext().authentication)
             }
             Mono.empty()

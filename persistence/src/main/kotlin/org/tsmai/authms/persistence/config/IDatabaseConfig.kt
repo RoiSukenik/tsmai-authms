@@ -1,4 +1,5 @@
 package org.tsmai.authms.persistence.config
 
-interface IDatabaseConfig {
+fun interface IDatabaseConfig {
+    fun getDatabaseType():String
 }

@@ -7,7 +7,6 @@ import com.tsmai.controllers.models.LogoutResponse
 import com.tsmai.controllers.models.RegistrationRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestBody
-import org.tsmai.authms.persistence.models.resource.User
 import reactor.core.publisher.Mono
 
 

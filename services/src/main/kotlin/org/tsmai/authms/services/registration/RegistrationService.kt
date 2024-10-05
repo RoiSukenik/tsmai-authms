@@ -1,7 +1,6 @@
 package org.tsmai.authms.services.registration
 
 import jakarta.inject.Inject
-import lombok.NoArgsConstructor
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tsmai.authms.mappers.resources.UserMapper

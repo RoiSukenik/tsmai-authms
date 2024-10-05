@@ -25,3 +25,6 @@ spring:
     couchbase:
       bucket-name: "auth"
       auto-index: true
+
+database:
+  type: "couchbase"

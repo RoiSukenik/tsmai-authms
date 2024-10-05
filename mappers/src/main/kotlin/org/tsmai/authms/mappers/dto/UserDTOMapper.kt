@@ -7,6 +7,6 @@ import org.tsmai.authms.persistence.models.resource.User
 
 
 @Mapper(implementationPackage = DTOConfig.DTO_MAPPER_IMPLEMENTATION, uses = [UserIdDTOMapper::class])
-interface UserDTOMapper {
+fun interface UserDTOMapper {
     fun toUser(user: UserDTO): User
 }

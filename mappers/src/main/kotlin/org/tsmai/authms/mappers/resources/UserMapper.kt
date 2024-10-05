@@ -9,7 +9,7 @@ import org.tsmai.authms.persistence.models.resource.User
     implementationPackage = ResourceConfig.RESOURCE_MAPPER_IMPLEMENTATION,
     uses = [UserIdMapper::class]
 )
-interface UserMapper {
+fun interface UserMapper {
     fun toUserDTO(user: User): UserDTO
 
 }

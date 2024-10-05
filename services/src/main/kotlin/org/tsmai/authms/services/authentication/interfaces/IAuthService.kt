@@ -1,6 +1,6 @@
 package org.tsmai.authms.services.authentication.interfaces
 
-interface IAuthService {
+fun interface IAuthService {
 
     fun getAuthType(): String
 }

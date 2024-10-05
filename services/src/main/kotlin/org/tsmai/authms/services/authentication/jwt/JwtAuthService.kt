@@ -6,7 +6,6 @@ import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.stereotype.Service
 import org.tsmai.authms.services.authentication.interfaces.AuthServiceType
 import org.tsmai.authms.services.authentication.interfaces.IJwtAuthService
 import java.util.Date

@@ -5,6 +5,7 @@ import com.tsmai.controllers.models.AuthenticationResponse
 import com.tsmai.controllers.models.LogoutResponse
 import com.tsmai.controllers.models.RegistrationRequest
 import jakarta.inject.Inject
+import kotlinx.coroutines.reactor.mono
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,14 +25,14 @@ class AuthController(
     @PostMapping(path = ["/login"])
     override suspend fun login(@RequestBody request: AuthenticationRequest): Mono<ResponseEntity<AuthenticationResponse>> {
         return loginService.login(request.username, request.password).let { jwtToken ->
-            return@let Mono.just(ResponseEntity(AuthenticationResponse(jwtToken), HttpStatus.OK))
+            return@let mono { ResponseEntity(AuthenticationResponse(jwtToken.toString()), HttpStatus.OK) }
         }
     }
 
     @PostMapping(path = ["/register"])
     override suspend fun register(@RequestBody request: RegistrationRequest): Mono<ResponseEntity<AuthenticationResponse>> {
         return registrationService.registerUser(request.user).let { jwtToken ->
-            return@let Mono.just(ResponseEntity(AuthenticationResponse(jwtToken), HttpStatus.CREATED))
+            return@let mono { ResponseEntity(AuthenticationResponse(jwtToken), HttpStatus.CREATED) }
         }
     }
 
